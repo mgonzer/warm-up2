@@ -10,13 +10,13 @@ module.exports = {
       return users[0];
     })
   },
-  getAll(){
-    return knex('cigar')
+  getAll(id){
+    return knex('cigar').where('smoker_id', id)
   },
-  getOne(id){
-    return knex('cigar').where('id', id).first()
+  getOne(id, cigarID){
+    return knex('cigar').where('id', cigarID).andWhere('cigar.smoker_id', id)
   },
-  createOne(cigar){
+  createOne(id, cigar){
     return knex('cigar').insert(cigar).returning('*')
   },
   updateCigar(id, cigar){
